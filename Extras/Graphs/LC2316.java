@@ -1,12 +1,12 @@
 class Solution {
-    int [] arr;
-    public void dfs(ArrayList<ArrayList<Integer>> adj, int curr, boolean [] visited,int k){
+    int count = 0;
+    public void dfs(ArrayList<ArrayList<Integer>> adj, int curr, boolean [] visited){
         if(visited[curr])return;
         visited[curr] = true;
-        arr[k]++;
+        count++;
         for(int neighbor : adj.get(curr)){
             if(!visited[neighbor]){
-                dfs(adj,neighbor,visited,k);
+                dfs(adj,neighbor,visited);
             }
         }
     }
@@ -22,20 +22,12 @@ class Solution {
 
         boolean [] visited = new boolean[n];
         long ans = 0;
-        int k = 0;
-        arr = new int[n];
         for(int i = 0; i<n; i++){
             if(!visited[i]){
-                dfs(adj,i,visited,k);
-                k++;
+                count = 0;
+                dfs(adj,i,visited);
+                ans += 1L*count*(n-count);
             }
-        }
-        long total = 0;
-        for(int i = 0; i<arr.length; i++){
-            total+=arr[i];
-        }
-        for(int i = 0; i<arr.length; i++){
-            ans+=(total-arr[i])*arr[i];
         }
         return ans/2;
     }
