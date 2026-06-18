@@ -1,3 +1,4 @@
+//recursion
 class Solution {
     int t[];
     public int helper(int [] nums, int i){
@@ -11,5 +12,16 @@ class Solution {
         t = new int[101];
         Arrays.fill(t,-1);
         return helper(nums,0);
+    }
+}
+//iterative dp
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        int [] dp = new int[n+2];
+        for(int i = n-1; i>=0; i--){
+            dp[i] = Math.max(nums[i]+dp[i+2], dp[i+1]);
+        }
+        return dp[0];
     }
 }
